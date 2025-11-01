@@ -7,35 +7,39 @@ public class AVLTree {
   private Node root;
 
   /**
-   * Inserts a value into the AVL tree. Adjusts the tree structure to maintain
-   * AVL balancing property after the insertion.
+   * Inserts a value into the AVL tree, maintaining the AVL balance properties.
    *
-   * @param value the integer value to be inserted into the AVL tree
+   * @param value the integer value to insert
    */
   public void insert(int value) {
     root = insertRec(root, value);
   }
 
   /**
-   * Computes the height of a node in the AVL tree.
+   * Calculates the height of a given node in the AVL tree.
+   * The height is defined as the distance from the node to its farthest leaf.
+   * For a null node, the height is considered as 0.
    *
-   * @param node the node whose height is requested; may be null
-   * @return 0 if the node is null; otherwise the stored height of the node
+   * @param node the node whose height is to be calculated; may be null
+   * @return the height of the node or 0 if the node is null
    */
   private int height(Node node) {
     return node == null ? 0 : node.height;
   }
 
+
   /**
-   * Calculates the balance factor of a node.
-   * The balance factor is defined as height(left subtree) - height(right subtree).
+   * Calculates the balance factor of a given node in the AVL tree.
+   * The balance factor is defined as the difference between the height of the left subtree
+   * and the height of the right subtree of the node. For a null node, the balance factor is 0.
    *
-   * @param node the node whose balance factor is calculated; may be null
-   * @return the balance factor, or 0 if the node is null
+   * @param node the node whose balance factor is to be calculated; may be null
+   * @return the balance factor of the node or 0 if the node is null
    */
   private int getBalance(Node node) {
     return node == null ? 0 : height(node.left) - height(node.right);
   }
+
 
   /**
    * Performs a right rotation on the given subtree root to restore AVL balance.
@@ -57,6 +61,7 @@ public class AVLTree {
     return x;
   }
 
+
   /**
    * Performs a left rotation on the given subtree root to restore AVL balance.
    *
@@ -77,13 +82,15 @@ public class AVLTree {
     return y;
   }
 
+
   /**
-   * Recursively inserts a value into the subtree rooted at the given node and
-   * rebalances the subtree according to AVL rules.
+   * Recursively inserts a value into the AVL tree, ensuring the tree remains balanced.
+   * If the specified value already exists in the tree, no changes are made.
+   * Balancing operations are performed as needed to maintain AVL properties.
    *
-   * @param node  the current subtree root; may be null
-   * @param value the value to insert
-   * @return the potentially new root of the subtree after insertion and rebalancing
+   * @param node  the current root node of the subtree where the value is to be inserted; may be null
+   * @param value the integer value to insert into the tree
+   * @return the new root of the subtree after insertion
    */
   private Node insertRec(Node node, int value) {
     if (node == null) {

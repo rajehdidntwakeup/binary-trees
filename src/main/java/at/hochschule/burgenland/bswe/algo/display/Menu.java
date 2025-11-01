@@ -10,21 +10,52 @@ import at.hochschule.burgenland.bswe.algo.model.Node;
 import at.hochschule.burgenland.bswe.algo.traversal.AVLTreeTraversal;
 import at.hochschule.burgenland.bswe.algo.traversal.TreeTraverser;
 
+/**
+ * The Menu class provides an interactive command-line interface (CLI) for performing
+ * various operations on an AVL tree. It allows users to manually insert numbers,
+ * traverse the tree in different orders, and display tree properties, among other features.
+ * The class encapsulates user interactions and input validation, maintaining tight
+ * integration with the AVLTree structure.
+ */
 public class Menu {
 
   private final Scanner scanner;
   private AVLTree tree;
 
   /**
-   * Creates a new menu with a fresh AVL tree and an interactive scanner.
+   * Constructs a Menu instance, initializing the required components for the menu system.
+   * This includes:
+   * - Creating a new instance of AVLTree to manage tree operations.
+   * - Initializing a Scanner for input handling from standard input.
+   * This constructor sets up the fundamental environment for the interactive menu.
    */
   public Menu() {
     this.tree = new AVLTree();
     this.scanner = new Scanner(System.in);
   }
 
+
   /**
-   * Starts the interactive CLI menu loop; blocks until the user chooses to exit.
+   * Starts the interactive menu-driven program for managing an AVL tree.
+   * This method provides a continuous loop to allow users to interact with the application
+   * through various options such as adding numbers, traversing the tree, displaying the tree structure,
+   * fetching tree information, clearing the tree, and exiting the program.
+   * The method performs the following:
+   * - Displays a welcome message to the user.
+   * - Continuously displays the main menu until the user chooses to exit.
+   * - Prompts the user for a menu choice and processes the selected option.
+   * - Executes corresponding actions for each menu option, including managing the AVL tree
+   * and invoking helper methods for specific operations.
+   * Menu choices include:
+   * 1. Adding numbers manually to the AVL tree.
+   * 2. Calling the traverse method with user input.
+   * 3. Printing the AVL tree structure.
+   * 4. Performing a traversal of the tree.
+   * 5. Displaying detailed tree information.
+   * 6. Clearing the AVL tree.
+   * 7. Exiting the program.
+   * Handles invalid menu choices by prompting the user to enter a valid selection.
+   * Exits the program gracefully when the user selects the appropriate option.
    */
   public void start() {
     displayWelcomeMessage();
@@ -61,8 +92,19 @@ public class Menu {
     }
   }
 
+
   /**
-   * Prints an introduction banner and a brief feature overview to the console.
+   * Displays the welcome message for the AVL Tree Program.
+   * This method outputs an introductory message explaining the
+   * functionality and purpose of the program to the console.
+   * Key details included in the welcome message:
+   * - Introduction to program capabilities, such as building and maintaining an AVL Tree.
+   * - Instructions for adding unique, non-negative numbers.
+   * - Overview of tree traversal options (e.g., pre-order, in-order, post-order).
+   * - Assurance of maintaining AVL tree balance and unique values.
+   * - General expectations for tree information and visualization.
+   * The displayed message provides users with essential information to begin interacting
+   * with the menu-driven AVL tree application.
    */
   private void displayWelcomeMessage() {
     System.out.println("=========================================");
@@ -79,7 +121,18 @@ public class Menu {
   }
 
   /**
-   * Shows the main menu options and prompts the user for a choice.
+   * Displays the main menu of the AVL Tree application.
+   * This method outputs the available menu options to the console for user selection.
+   * The menu includes the following choices:
+   * 1. Add numbers manually to the AVL tree.
+   * 2. Call the traverse method with inputted numbers and a specified traversal order.
+   * 3. Print the structure of the current AVL tree.
+   * 4. Perform a traversal operation on the tree and display the result.
+   * 5. Show detailed information about the AVL tree, including its properties.
+   * 6. Clear all nodes in the AVL tree and reset it.
+   * 7. Exit the application.
+   * After displaying the options, the user is prompted to enter their choice
+   * by inputting a number between 1 and 7.
    */
   private void displayMainMenu() {
     System.out.println("\n=== MAIN MENU ===");
@@ -94,9 +147,12 @@ public class Menu {
   }
 
   /**
-   * Reads and validates a main menu choice from standard input.
+   * Prompts the user to input a menu choice for the AVL Tree application and validates the input.
+   * The method ensures that the input is a valid integer within the acceptable range of 1 to 7
+   * (inclusive). It loops until valid input is provided, displaying appropriate error messages for
+   * invalid entries.
    *
-   * @return a number between 1 and 7 representing the selected action
+   * @return the validated menu choice as an integer in the range 1 to 7
    */
   private int getMenuChoice() {
     while (true) {
@@ -114,9 +170,23 @@ public class Menu {
     }
   }
 
+
   /**
-   * Interactive flow to insert numbers one-by-one entered by the user.
-   * Ensures only unique integers are added to the tree.
+   * Manually adds unique numbers to the AVL tree through user input.
+   * This method prompts the user to input numbers one by one and inserts them
+   * into the AVL tree while ensuring only unique values are added. The user
+   * can terminate the input process by entering the word "done". For duplicate
+   * numbers or invalid inputs, proper messages are displayed.
+   * Key details of the process:
+   * - The user is prompted to input a number or 'done' to finish.
+   * - If the input is a valid integer and not already present in the tree,
+   * it is inserted into the tree.
+   * - If the number already exists in the tree, it is skipped as a duplicate.
+   * - Invalid inputs (non-integer and not 'done') are rejected with a message.
+   * Upon completion, a summary is displayed, including:
+   * - The total count of successfully added numbers.
+   * - The total count of rejected numbers due to duplicates.
+   * - The resulting AVL tree structure is displayed after each insertion.
    */
   private void addNumbersManually() {
     System.out.println("\n=== ADD NUMBERS MANUALLY ===");
@@ -158,8 +228,17 @@ public class Menu {
   }
 
   /**
-   * Calls the traverse method with user-provided numbers and order.
-   * Reads numbers from console input and calls AVLTreeTraversal.traverse()
+   * Executes the process of calling the `traverse` method from the `AVLTreeTraversal` class.
+   * This involves validating input numbers, collecting traversal order input, and invoking the method with the
+   * provided parameters.
+   * The method performs the following steps:
+   * - Prompts the user to input an array of integers. Only positive integers are permitted; negative inputs are rejected.
+   * - Prompts the user to specify the traversal order as a string.
+   * - Calls the `traverse` method from the `AVLTreeTraversal` class, passing the collected inputs.
+   * - Measures and logs the execution time and results of the method call.
+   * - Handles and logs any exceptions that occur during the execution of the `traverse` method.
+   * If valid input numbers are not provided, the operation is canceled, and the method terminates without performing
+   * further actions.
    */
   private void callTraverseMethod() {
     System.out.println("\n=== CALL TRAVERSE METHOD ===");
@@ -173,10 +252,8 @@ public class Menu {
       return;
     }
 
-    // Get traversal order
     String order = getTraversalOrder();
 
-    // Call the traverse method
     System.out.println("\n=== EXECUTING TRAVERSE METHOD ===");
     System.out.println("Parameters:");
     System.out.println("  numbers: " + Arrays.toString(numbers));
@@ -199,9 +276,16 @@ public class Menu {
   }
 
   /**
-   * Reads numbers from console input with validation
+   * Prompts the user to input a series of positive integers in either comma-separated
+   * or space-separated formats. The input is validated to ensure only positive integers
+   * are accepted, while duplicates and invalid entries are handled appropriately.
+   * The method performs the following:
+   * - Accepts input from the user.
+   * - Validates integers are positive; negative numbers and invalid inputs are rejected.
+   * - Removes duplicate numbers while preserving the order.
+   * - Displays warnings for invalid or negative inputs and informs about removed duplicates.
    *
-   * @return array of valid positive integers
+   * @return An array of unique, valid
    */
   private int[] getNumbersInput() {
     System.out.println("\nEnter numbers in one of these formats:");
@@ -279,7 +363,16 @@ public class Menu {
   }
 
   /**
-   * Prompts the user to choose a traversal order for the traverse method call.
+   * Prompts the user to select a tree traversal order using a numerical or textual input.
+   * The options for traversal order are:
+   * 1. Preorder (Root → Left → Right)
+   * 2. Inorder (Left → Root → Right) - Sorted order
+   * 3. Postorder (Left → Right → Root)
+   * 4. Level order (Breadth-first, level by level)
+   * The method continuously prompts the user until a valid input is provided.
+   *
+   * @return A string representing the selected traversal order.
+   * It could be one of the following values: "preorder", "inorder", "postorder
    */
   private String getTraversalOrder() {
     System.out.println("\n=== SELECT TRAVERSAL ORDER ===");
@@ -312,8 +405,11 @@ public class Menu {
   }
 
   /**
-   * Prints the current AVL tree structure and per-node balance information.
-   * If the tree is empty, informs the user and returns.
+   * Prints the structure and balance information of the AVL tree.
+   * This method displays a visual representation of the AVL tree, including
+   * balance information for each node. If the tree is empty, a message is printed
+   * indicating that the tree is empty and prompting the user to add elements.
+   * Precondition: The tree object must be initialized before calling this method.
    */
   private void printAVLTree() {
     System.out.println("\n=== AVL TREE STRUCTURE ===");
@@ -327,8 +423,11 @@ public class Menu {
   }
 
   /**
-   * Prompts the user to choose a traversal order, performs the traversal,
-   * and prints the result to the console.
+   * Performs a tree traversal operation based on the user's choice of traversal type.
+   * This method prompts the user to input their desired traversal type for the tree
+   * and then prints the traversal result. The available traversal options are:
+   * Preorder (Root-Left-Right), Inorder (Left-Root-Right), Postorder (Left-Right-Root),
+   * or Level
    */
   private void performTraversal() {
     if (treeIsEmpty()) {
@@ -357,9 +456,10 @@ public class Menu {
   }
 
   /**
-   * Reads and validates a traversal menu choice from standard input.
+   * Reads and validates user input to select a traversal choice between 1 and 4.
+   * Continuously prompts the user until a valid input is received.
    *
-   * @return a number between 1 and 4 representing the traversal type
+   * @return the user's chosen traversal option as an integer between 1 and 4
    */
   private int getTraversalChoice() {
     while (true) {
@@ -378,8 +478,18 @@ public class Menu {
   }
 
   /**
-   * Displays general information about the current tree, including root value,
-   * node count, height, min/max values, and prints inorder and preorder traversals.
+   * Displays detailed information about the tree structure.
+   * Prints a summary of the tree's key attributes including its root value, total number of nodes,
+   * height, minimum and maximum values, and traversals (inorder and preorder).
+   * If the tree is empty, a message indicating this will be displayed instead.
+   * The displayed information includes:
+   * - The root node's value.
+   * - Total number of nodes in the tree.
+   * - Height of the tree.
+   * - The minimum value present in the tree (based on inorder traversal).
+   * - The maximum value present in the tree (based on inorder traversal).
+   * - Inorder traversal list (sorted order).
+   * - Preorder traversal list.
    */
   private void displayTreeInfo() {
     System.out.println("\n=== TREE INFORMATION ===");
@@ -405,8 +515,17 @@ public class Menu {
   }
 
   /**
-   * Clears the current tree after a yes/no confirmation.
-   * Creates a new empty AVLTree instance when confirmed.
+   * Clears the current AVL tree after confirming with the user.
+   * This method prompts the user for confirmation before resetting the tree
+   * to a new, empty instance of an AVLTree. If the user confirms by entering
+   * "yes" or "y" (case-insensitively), the tree is cleared. Otherwise, the
+   * operation is canceled, and the tree remains unchanged.
+   * Preconditions:
+   * - A Scanner instance must be defined and initialized before calling this method.
+   * - The 'tree' instance variable must be an instance of AVLTree.
+   * Postconditions:
+   * - If confirmed, the current tree is reset to an empty AVLTree instance.
+   * - If not confirmed, the tree remains unchanged.
    */
   private void clearTree() {
     System.out.print("\nAre you sure you want to clear the tree? (yes/no): ");
@@ -421,7 +540,9 @@ public class Menu {
   }
 
   /**
-   * Prints a closing banner when the program is about to exit.
+   * Displays a formatted exit message to the console.
+   * This message indicates the termination of the program
+   * and includes a thank-you note for the user.
    */
   private void displayExitMessage() {
     System.out.println("\n============================================");
@@ -430,24 +551,22 @@ public class Menu {
     System.out.println("============================================");
   }
 
-  // Helper methods
-
   /**
-   * Checks whether the current tree already contains the specified number.
+   * Checks if the specified number exists within the binary tree.
    *
-   * @param number the value to look for
-   * @return true if the number exists in the tree; false otherwise
+   * @param number the number to search for within the tree
+   * @return {@code true} if the tree contains the specified number, otherwise {@code false}
    */
   private boolean treeContainsNumber(int number) {
     return checkIfNumberExists(tree.getRoot(), number);
   }
 
   /**
-   * Recursively checks whether a value exists in the subtree rooted at the given node.
+   * Checks if a specific number exists in the binary tree starting from the given node.
    *
-   * @param node   the subtree root to search (may be null)
-   * @param number the value to search for
-   * @return true if found; false otherwise
+   * @param node   the root node of the binary tree to be searched
+   * @param number the number to search for in the binary tree
+   * @return true if the number exists in the binary tree, false otherwise
    */
   private boolean checkIfNumberExists(Node node, int number) {
     if (node == null) {
@@ -460,20 +579,21 @@ public class Menu {
   }
 
   /**
-   * Indicates whether the current AVL tree has no nodes.
+   * Checks if the tree is empty.
    *
-   * @return true if the tree root is null; false otherwise
+   * @return true if the tree has no elements, false otherwise.
    */
   private boolean treeIsEmpty() {
     return tree.getRoot() == null;
   }
 
   /**
-   * Computes the height of a binary tree rooted at the given node.
-   * Height is the number of nodes on the longest path from this node to a leaf.
+   * Calculates the height of a binary tree starting from the given node.
+   * The height is determined as the number of edges on the longest path
+   * from the node to a leaf. If the tree is empty, the height is 0.
    *
-   * @param node the root of the subtree
-   * @return the height (0 for null)
+   * @param node the root node of the binary tree for which the height is to be calculated
+   * @return the height of the binary tree, or 0 if the node is null
    */
   private int getTreeHeight(Node node) {
     if (node == null) {

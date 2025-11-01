@@ -5,14 +5,17 @@ import java.util.List;
 
 import at.hochschule.burgenland.bswe.algo.model.Node;
 
+/**
+ * Utility class for creating visual representations of binary trees in ASCII format.
+ * This class provides methods to print a tree with hierarchical visual connectors
+ * and calculates the balance factor of nodes within the tree.
+ */
 public class TreePrinter {
 
-  // Pretty-print the tree using levels and ASCII connectors like in the example.
-
   /**
-   * Prints a visual ASCII representation of the binary tree to standard output.
+   * Prints the structure of a binary tree in a human-readable format using ASCII characters.
    *
-   * @param root the root node of the tree; if null, prints a message that the tree is empty
+   * @param root the root node of the tree to be printed; may be null
    */
   public static void printTree(Node root) {
     if (root == null) {
@@ -26,14 +29,15 @@ public class TreePrinter {
     printNodeInternal(nodes, 1, maxLevel);
   }
 
-  // --- Pretty printer helpers ---
 
   /**
-   * Recursively prints each level of the tree with ASCII connectors.
+   * Recursively prints nodes of a binary tree at a given level in an easily readable
+   * structure. It includes node values, connecting lines,
+   * and spacing for visualization.
    *
-   * @param nodes    the list of nodes at the current level (may contain nulls)
-   * @param level    the current level index starting at 1 for the root level
-   * @param maxLevel the maximum depth of the tree
+   * @param nodes    the list of nodes to print at the current level; may contain nulls
+   * @param level    the current depth level being printed, starting from 1
+   * @param maxLevel the maximum depth of the tree to determine spacing and structuring
    */
   private static void printNodeInternal(List<Node> nodes, int level, int maxLevel) {
     if (nodes.isEmpty() || isAllElementsNull(nodes)) {
@@ -62,7 +66,7 @@ public class TreePrinter {
     }
     System.out.println();
 
-    // print the connecting '/' and '\\' lines
+    // print the connecting '/' and '\' lines
     for (int i = 1; i <= edgeLines; i++) {
       for (Node node : nodes) {
         printWhitespaces(firstSpaces - i);
@@ -73,17 +77,17 @@ public class TreePrinter {
           continue;
         }
 
-        // left branch
+        // left side '/'
         if (node.left != null) {
           System.out.print("/");
         } else {
           System.out.print(" ");
         }
 
-        // the space between '/' and '\\' grows as i increases
+        // the space between '/' and '\' grows as i increases
         printWhitespaces(i + i - 1);
 
-        // right branch
+        // right side '\'
         if (node.right != null) {
           System.out.print("\\");
         } else {
@@ -136,23 +140,27 @@ public class TreePrinter {
     return true;
   }
 
-  // --- Balance utilities kept as-is ---
 
   /**
-   * Prints balance factor information for every node in the tree.
-   * The balance factor is computed as height(left) - height(right).
+   * Prints the balance information of a binary tree rooted at the provided node.
+   * Outputs the balance factor and balance status (e.g., BALANCED or UNBALANCED)
+   * for each node in the tree.
    *
-   * @param root the root of the tree for which to print balance information
+   * @param root the root node of the tree for which balance information is printed; may be null
    */
   public static void printBalanceInfo(Node root) {
     System.out.println("\n=== Balance Information ===");
     printBalanceRec(root);
   }
 
+
   /**
-   * Recursively prints the balance factor and status for each node in the tree.
+   * Recursively prints the balance information for each node in a binary tree.
+   * For each node, it computes and displays its balance factor and balance status
+   * (BALANCED if the absolute balance factor is less than or equal to 1, otherwise UNBALANCED).
+   * Traverses the tree in a pre-order manner.
    *
-   * @param node the current node being processed; may be null
+   * @param node the current node for which balance information is printed; may be null
    */
   private static void printBalanceRec(Node node) {
     if (node != null) {
@@ -164,13 +172,14 @@ public class TreePrinter {
     }
   }
 
+
   /**
-   * Computes a simple balance metric for the given node based on subtree depths.
-   * The metric equals maxLevel(left) - maxLevel(right).
-   * Note: This uses depth, not the stored AVL height.
+   * Computes the balance factor of a given binary tree node.
+   * The balance factor is calculated as the difference in height
+   * between the left and right subtrees of the node.
    *
-   * @param node the node for which to compute the balance metric; may be null
-   * @return the balance metric; 0 if the node is null
+   * @param node the binary tree node for which to calculate the balance factor; may be null
+   * @return the balance factor of the node; 0 if the node is null
    */
   private static int getBalance(Node node) {
     if (node == null) {

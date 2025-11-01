@@ -7,17 +7,12 @@ import java.util.Queue;
 
 import at.hochschule.burgenland.bswe.algo.model.Node;
 
+/**
+ * The TreeTraverser class provides utility methods to traverse a binary tree
+ * in various orders, including pre-order, in-order, post-order, and level-order.
+ */
 public class TreeTraverser {
-  /**
-   * Traverses a binary tree starting from the given root node and
-   * returns the traversal result as an array of integers. The order
-   * of traversal is determined by the specified traversal type.
-   *
-   * @param root  the root node of the binary tree to be traversed
-   * @param order a string specifying the traversal order. Valid options
-   *              are "preorder", "inorder", "postorder", and "levelorder"
-   * @return an array of integers representing the values
-   */
+
   public static int[] traverse(Node root, String order) {
     List<Integer> result = new ArrayList<>();
 
