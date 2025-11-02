@@ -207,7 +207,7 @@ public class Menu {
       try {
         int number = Integer.parseInt(input);
 
-        // Check if number already exists
+        // Check if the number already exists
         if (treeContainsNumber(number)) {
           System.out.println("Number " + number + " already exists in the tree. Skipping...");
           numbersRejected++;
@@ -547,7 +547,7 @@ public class Menu {
   private void displayExitMessage() {
     System.out.println("\n============================================");
     System.out.println("    THANK YOU FOR USING AVL TREE PROGRAM");
-    System.out.println("                  RAJÉH <3                    7");
+    System.out.println("                  RAJÉH <3                    ");
     System.out.println("============================================");
   }
 
