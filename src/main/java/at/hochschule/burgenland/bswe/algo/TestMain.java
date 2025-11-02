@@ -8,6 +8,8 @@ import at.hochschule.burgenland.bswe.algo.traversal.TreeTraverser;
 
 /**
  * This class is only used for testing purposes.
+ * Hopefully it's this time :)
+ * I went through all the algorithms that I used in my project.
  */
 public class TestMain {
 
@@ -58,7 +60,7 @@ public class TestMain {
     // 7) Invalid traversal type should throw
     expectIllegalArgument("invalid-order-exception", () -> TreeTraverser.traverse(balanced, "zigzag"));
 
-    // 8) Optional: printTraversal sanity (no assertion, just ensure no crash/output looks right)
+    // 8) printTraversal sanity (no assertion, just ensure no crash/output looks right)
     int[] inorder = TreeTraverser.traverse(balanced, "inorder");
     System.out.print("[INFO] printTraversal demo -> ");
     TreeTraverser.printTraversal(inorder, "inorder");
